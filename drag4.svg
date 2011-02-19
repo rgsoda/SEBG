@@ -69,17 +69,32 @@ onmouseup='release(evt)'
     function end_points(x1,y1,r1,x2,y2,r2)
     {
 	    // line between two circles
-	    var m,a,b,x3,y3,x4,y4;
+	    var a,b,m,x3,y3,x4,y4;
 	    m = 10; // marker offset
 	    d = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
-	    b = x1;
-	    a = (x2 - b)/d;
-	    x3 = r1*a + b;
-	    x4 = (d-r2-m)*a + b;
+      var points = function(pntx1, pntx2) {
+        var b = pntx1;
+	      var a = (pntx2 - b)/d;
+	      x3 = r1*a + b;
+	      x4 = (d-r2-m)*a + b;
+        return (r1*a+b, (d-r2-m)*a + b);
+
+
+      }
+//      console.log(points(x1,x2));
+      x3, x4 = points(x1, x2);
+//      y3, y4 = points(y1, y2);
+
+	    // b = x1;
+	    // a = (x2 - b)/d;
+	    // x3 = r1*a + b;
+	    // x4 = (d-r2-m)*a + b;
+
 	    b = y1;
 	    a = (y2 - b)/d;
-	    y3 = (r1)*a + b;
+	    y3 = r1*a + b;
 	    y4 = (d-r2-m)*a + b;
+
 	    return {x1:x3, y1:y3, x2:x4, y2:y4}
     }
 
